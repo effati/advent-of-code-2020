@@ -21,8 +21,7 @@ def slope_finder(right, down):
     max_length = len(lines[0]) - 1
     pos = right
     for line in range(down, len(lines), down):
-        if pos >= max_length:
-            pos -= max_length
+        pos = pos % max_length
         if lines[line][pos] == "#":
             trees += 1
         pos += right
