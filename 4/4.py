@@ -24,7 +24,6 @@ def two_star():
     ans = 0
     f = open("input").read().splitlines()
     passport = {}
-    print(f[1090:])
     for line in f:
         if line == "":
             ans += check_valid(passport)
