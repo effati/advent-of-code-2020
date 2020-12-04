@@ -32,7 +32,7 @@ def slope_finder(right, down):
 
 
 def two_star_one_liner():
-    return reduce(lambda x, y: x * y, [sum([1 if row % alt[1] == 0 and line[row * alt[0] % len(line)] == "#" else 0 for row, line in enumerate(open("input").read().splitlines())]) for alt in [(1, 1), (3, 1), (5, 1), (7, 1), (1, 2)]])
+    return reduce(lambda x, y: x * y, [sum([row % alt[1] == 0 and line[row * alt[0] % len(line)] == "#" for row, line in enumerate(open("input").read().splitlines())]) for alt in [(1, 1), (3, 1), (5, 1), (7, 1), (1, 2)]])
 
 
 if __name__ == '__main__':
