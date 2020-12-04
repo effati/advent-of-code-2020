@@ -1,3 +1,6 @@
+from functools import reduce
+
+
 def one_star():
     return slope_finder(3, 1)
 
@@ -28,8 +31,13 @@ def slope_finder(right, down):
     return trees
 
 
+def two_star_one_liner():
+    return reduce(lambda x, y: x * y, [sum([1 if row % alt[1] == 0 and line[row * alt[0] % len(line)] == "#" else 0 for row, line in enumerate(open("input").read().splitlines())]) for alt in [(1, 1), (3, 1), (5, 1), (7, 1), (1, 2)]])
+
+
 if __name__ == '__main__':
     with open("input", "r") as f:
         lines = f.readlines()
     print(one_star())
     print(two_star())
+    print(two_star_one_liner())
