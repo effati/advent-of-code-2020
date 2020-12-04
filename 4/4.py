@@ -36,19 +36,25 @@ def two_star():
     return ans
 
 
+def between(num, lb, ub):
+    return lb <= num <= ub
+
+
 def check_valid(passport):
     if not set(passport.keys()).issuperset(required):
         return 0
-    if (1920 > int(passport['byr']) > 2002 or
-            2010 > int(passport['iyr']) > 2020 or
-            2020 > int(passport['eyr']) > 2030):
+    if (not between(int(passport['byr']), 1920, 2002) or
+            not between(int(passport['iyr']), 2010, 2020) or
+            not between(int(passport['eyr']), 2020, 2030)):
         return 0
     if not re.match(r"^[0-9]+(in|cm)$", passport['hgt']):
         return 0
-    if passport['hgt'].endswith("cm") and 150 > int(passport['hgt'].split("cm")[0]) > 193:
-        return 0
-    if passport['hgt'].endswith("in") and 59 > int(passport['hgt'].split("in")[0]) > 76:
-        return 0
+    if passport['hgt'].endswith("cm"):
+        if not between(int(passport['hgt'].split("cm")[0]), 150, 193):
+            return 0
+    if passport['hgt'].endswith("in"):
+        if not between(int(passport['hgt'].split("in")[0]), 59, 76):
+            return 0
     if not re.match(r"^#[a-f0-9]{6}$", passport['hcl']):
         return 0
     if passport['ecl'] not in {"amb", "blu", "brn", "gry", "grn", "hzl", "oth"}:
