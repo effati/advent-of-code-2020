@@ -17,9 +17,9 @@ def two_star():
         prev_seat = seat
 
 
-def one_liner():    # WIP
-    all_ids = sorted([int(line[:7], 2) * 8 + int(line[7:], 2) for line in [re.sub(r"[FL]", "0", re.sub(r"[BR]", "1", line)) for line in open("input").read().splitlines()]])
-    return set(range(all_ids[0], all_ids[-1])).difference(all_ids).pop()
+def two_liner():
+    seats = sorted([int(line[:7], 2) * 8 + int(line[7:], 2) for line in [re.sub(r"[FL]", "0", re.sub(r"[BR]", "1", line)) for line in open("input").read().splitlines()]])
+    return [i for i in range(min(seats), max(seats)) if i not in seats][0]
 
 
 def get_id(line):
@@ -31,4 +31,4 @@ def get_id(line):
 if __name__ == '__main__':
     print(one_star())
     print(two_star())
-    print(one_liner())
+    print(two_liner())
