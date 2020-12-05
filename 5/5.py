@@ -2,17 +2,12 @@ import re
 
 
 def one_star():
-    max_id = 0
-    for line in f:
-        curr_id = get_id(line)
-        if curr_id > max_id:
-            max_id = curr_id
-    return max_id
+    return max([get_id(line) for line in open("input").read().splitlines()])
 
 
 def two_star():
     all_ids = []
-    for line in f:
+    for line in open("input").read().splitlines():
         all_ids.append(get_id(line))
     all_ids = sorted(all_ids)
     prev_seat = all_ids[0] - 1
@@ -22,15 +17,18 @@ def two_star():
         prev_seat = seat
 
 
+def one_liner():    # WIP
+    all_ids = sorted([int(line[:7], 2) * 8 + int(line[7:], 2) for line in [re.sub(r"[FL]", "0", re.sub(r"[BR]", "1", line)) for line in open("input").read().splitlines()]])
+    return set(range(all_ids[0], all_ids[-1])).difference(all_ids).pop()
+
+
 def get_id(line):
     line = re.sub(r"[FL]", "0", line)
     line = re.sub(r"[BR]", "1", line)
-    row = int(line[:7], 2)
-    col = int(line[7:], 2)
-    return row * 8 + col
+    return int(line[:7], 2) * 8 + int(line[7:], 2)
 
 
 if __name__ == '__main__':
-    f = open("input").read().splitlines()
     print(one_star())
     print(two_star())
+    print(one_liner())
