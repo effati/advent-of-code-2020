@@ -16,8 +16,18 @@ def one_star():
 
 
 def two_star(invalid_num):
-    
-
+    for i, start in enumerate(f):
+        tot = 0
+        smallest = largest = int(start)
+        for l in f[i:]:
+            curr = int(l)
+            tot += curr
+            largest = max(curr, largest)
+            smallest = min(curr, smallest)
+            if tot == invalid_num:
+                return smallest + largest
+            if tot > invalid_num:
+                break
 
 
 if __name__ == '__main__':
