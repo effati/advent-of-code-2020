@@ -6,7 +6,14 @@ def two_star():
     return play_game(30000000)
 
 
-def play_game(n):
+def play_game(n):   # cleaner version
+    prev, mem = f[-1], {f[n]: n + 1 for n in range(len(f))}
+    for i in range(len(mem) + 1, n + 1):
+        mem[prev], prev = i - 1, 0 if prev not in mem else i - 1 - mem[prev]
+    return prev
+
+
+def play_game_old(n):   # first solution
     mem = {f[n]: n + 1 for n in range(len(f) - 1)}
     prev = f[-1:][0]
     for i in range(len(mem) + 2, n + 1):
